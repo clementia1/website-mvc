@@ -13,7 +13,6 @@ namespace website_mvc.Controllers
             _bookService = bookService;
         }
         
-        [HttpGet]
         public async Task<IActionResult> GetById(string id)
         {
             var book = await _bookService.GetById(id);
