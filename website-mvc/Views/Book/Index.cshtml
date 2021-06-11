@@ -2,9 +2,14 @@
 
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = @Model.Title;
 }
 
-<div class="text-center">
-    <p>Some book with id: @Model.Title</p>
+<div class="book-block">
+    <div class="jumbotron">
+        <h3>@Model.Title</h3>
+        <p class="lead">@Model.Author</p>
+        <hr class="my-4">
+        <p>@Model.Description</p>
+    </div>
 </div>

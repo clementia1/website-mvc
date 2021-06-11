@@ -2,8 +2,7 @@
 
 <div class="books-container">
     <h4 style="text-align: center">Books available</h4>
-    	
-    <a asp-controller="Home" asp-action="Privacy">Go to Privacy</a>
+    
     <div class="book-list">
         @foreach (var book in Model)
         {
@@ -12,7 +11,9 @@
                 <div class="card-body">
                     <h5 class="card-title">@book.Title</h5>
                     <p class="card-text">by @book.Author</p>
-                    <a class="btn btn-primary btn-block" asp-controller="Book" asp-action="GetById" asp-route-id=@book.Id>Show</a>
+                    <div class="d-grid gap-2">
+                        <a class="btn btn-primary btn-block" asp-controller="Book" asp-action="GetById" asp-route-id=@book.Id>Show</a>
+                    </div>
                 </div>
             </div>
         }

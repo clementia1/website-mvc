@@ -1,0 +1,19 @@
+﻿@model website_mvc.Entities.BookEntity
+
+
+<form method="post" enctype="multipart/form-data" asp-controller="Book" asp-action="Update">
+  <input name="id" type="hidden" value="@Model.Id">
+  <div class="mb-3">
+    <label for="book-title-input" class="form-label">Title</label>
+    <input type="text" class="form-control" id="book-title-input" value="@Model.Title" name="title">
+  </div>
+  <div class="mb-3">
+    <label for="book-author-input" class="form-label">Author</label>
+    <input type="text" class="form-control" id="book-author-input" value="@Model.Author" name="author">
+  </div>
+  <div class="mb-3">
+    <label for="book-description-input" class="form-label">Description</label>
+    <input type="text" class="form-control" id="book-description-input" value="@Model.Description" name="description">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
