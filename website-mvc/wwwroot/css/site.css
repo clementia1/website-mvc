@@ -82,5 +82,5 @@ body {
 
 .book-list > .book {
   margin: 16px;
-  border-radius: .3rem;
+  border-radius: 8px;
 }

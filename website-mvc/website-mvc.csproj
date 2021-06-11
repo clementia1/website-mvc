@@ -5,8 +5,4 @@
         <RootNamespace>website_mvc</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="Services" />
-    </ItemGroup>
-
 </Project>
