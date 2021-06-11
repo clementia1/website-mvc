@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using website_mvc.Providers;
+using website_mvc.Providers.Abstractions;
+using website_mvc.Services;
+using website_mvc.Services.Abstractions;
 
 namespace website_mvc
 {
@@ -23,6 +27,8 @@ namespace website_mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IBookService, BookService>();
+            services.AddSingleton<IBookProvider, BookProvider>();
             services.AddControllersWithViews();
         }
 

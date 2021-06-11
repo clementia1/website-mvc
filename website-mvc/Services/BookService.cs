@@ -1,44 +1,48 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using website_mvc.Entities;
+using website_mvc.Providers.Abstractions;
+using website_mvc.Services.Abstractions;
 
 namespace website_mvc.Services
 {
-    public class BookService
+    public class BookService : IBookService
     {
-        private readonly ILogger<ManageService> _logger;
+        private readonly ILogger<BookService> _logger;
         private readonly IBookProvider _bookProvider;
 
-        public ManageService(
-            ILogger<ManageService> logger,
+        public BookService(
+            ILogger<BookService> logger,
             IBookProvider bookProvider)
         {
             _logger = logger;
             _bookProvider = bookProvider;
         }
 
-        public async Task<string> CreateAsync(string name, string description)
+        public async Task<string> Create(string title, string author, string description)
         {
-            _logger.LogInformation($"Started {nameof(CreateAsync)}");
-            return await _bookProvider.CreateAsync(name, description);
+            return await _bookProvider.Create(title, author, description);
         }
 
-        public async Task<bool> UpdateAsync(string id, string? name, string? description)
+        public async Task<bool> Update(string id, string? title, string? author, string? description)
         {
-            _logger.LogInformation($"Started {nameof(UpdateAsync)}");
-            return await _bookProvider.UpdateAsync(id, name, description);
+            return await _bookProvider.Update(id, title, author, description);
         }
 
-        public async Task<bool> DeleteAsync(string id)
+        public async Task<bool> Delete(string id)
         {
-            _logger.LogInformation($"Started {nameof(DeleteAsync)}");
-            return await _bookProvider.DeleteAsync(id);
+            return await _bookProvider.Delete(id);
         }
 
-        public async Task<BookEntity?> GetByIdAsync(string id)
+        public async Task<BookEntity> GetById(string id)
         {
-            _logger.LogInformation($"Started {nameof(GetByIdAsync)}");
-            return await _bookProvider.GetByIdAsync(id);
+            return await _bookProvider.GetById(id);
+        }
+
+        public async Task<IReadOnlyCollection<BookEntity>> GetAll()
+        {
+            return await _bookProvider.GetAll();
         }
     }
 }

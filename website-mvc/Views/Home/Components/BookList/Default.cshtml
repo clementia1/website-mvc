@@ -1,4 +1,4 @@
-﻿@model IEnumerable<website_mvc.Dto.BookDto>
+﻿@model IReadOnlyCollection<website_mvc.Entities.BookEntity>
 
 <div class="books-container">
     <h4 style="text-align: center">Books available</h4>
@@ -12,7 +12,7 @@
                 <div class="card-body">
                     <h5 class="card-title">@book.Title</h5>
                     <p class="card-text">by @book.Author</p>
-                    <a class="btn btn-primary btn-block" asp-controller="Book" asp-action="Index" asp-route-id=@book.Id>Show</a>
+                    <a class="btn btn-primary btn-block" asp-controller="Book" asp-action="GetById" asp-route-id=@book.Id>Show</a>
                 </div>
             </div>
         }
