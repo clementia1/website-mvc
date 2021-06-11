@@ -27,6 +27,7 @@ namespace website_mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddTransient<IBookService, BookService>();
             services.AddSingleton<IBookProvider, BookProvider>();
             services.AddControllersWithViews();
