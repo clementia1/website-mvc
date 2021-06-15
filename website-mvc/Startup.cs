@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using website_mvc.Providers;
-using website_mvc.Providers.Abstractions;
 using website_mvc.Services;
 using website_mvc.Services.Abstractions;
 

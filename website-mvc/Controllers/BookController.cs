@@ -35,7 +35,7 @@ namespace website_mvc.Controllers
 
         public async Task<IActionResult> Update([FromBody] BookDto bookDto)
         {
-            await _bookService.Update(bookDto.Id, bookDto.Title, bookDto.Author, bookDto.Description);
+            await _bookService.Update(bookDto);
             var books = await _bookService.GetAll();
             return View("../Home/Admin", books); 
         }
@@ -47,7 +47,7 @@ namespace website_mvc.Controllers
 
         public async Task<IActionResult> Create([FromBody] BookDto bookDto)
         {
-            await _bookService.Create(bookDto.Title, bookDto.Author, bookDto.Description);
+            await _bookService.Create(bookDto);
             var books = await _bookService.GetAll();
             return View("../Home/Admin", books); 
         }
