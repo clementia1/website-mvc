@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using website_mvc.Dto;
 using website_mvc.Services.Abstractions;
 
 namespace website_mvc.Controllers
@@ -44,9 +45,11 @@ namespace website_mvc.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Create(string title, string author, string description)
+        public async Task<IActionResult> Create(BookDto book)
         {
-            await _bookService.Create(title, author, description);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            
+            await _bookService.Create(book.Title, book.Author, book.Description);
             var books = await _bookService.GetAll();
             return View("../Home/Admin", books); 
         }

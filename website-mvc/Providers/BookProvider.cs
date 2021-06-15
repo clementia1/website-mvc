@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using website_mvc.Entities;
 using website_mvc.Providers.Abstractions;
 
@@ -13,9 +15,15 @@ namespace website_mvc.Providers
         private readonly ILogger<BookProvider> _logger;
         private readonly List<BookEntity> _entities;
 
-        public BookProvider(ILogger<BookProvider> logger)
+        public BookProvider(ILogger<BookProvider> logger, HttpClient client)
         {
             _logger = logger;
+            client.BaseAddress = new Uri("https://localhost:40001");
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            client.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactory");
+
+            Client = client;
+            
             _entities = new List<BookEntity>
             {
                 new BookEntity
@@ -55,6 +63,8 @@ namespace website_mvc.Providers
                 }
             };
         }
+        
+        public HttpClient Client { get; }
 
         public async Task<string> Create(string title, string author, string description)
         {
@@ -77,12 +87,12 @@ namespace website_mvc.Providers
         {
             return await Task.Run(() =>
             {
-                var item = _entities.FirstOrDefault(item => item.Id == id);
-                if (item is null) return false;
+                var book = _entities.FirstOrDefault(item => item.Id == id);
+                if (book is null) return false;
 
-                item.Title = title;
-                item.Author = author;
-                item.Description = description;
+                book.Title = title;
+                book.Author = author;
+                book.Description = description;
 
                 return true;
             });
@@ -101,10 +111,7 @@ namespace website_mvc.Providers
 
         public async Task<BookEntity> GetById(string id)
         {
-            return await Task.Run(() =>
-            {
-                return _entities.FirstOrDefault(item => item.Id == id);
-            });
+            return await Client.GetFromJsonAsync<BookEntity>(id);
         }
 
         public async Task<IReadOnlyCollection<BookEntity>> GetAll()
