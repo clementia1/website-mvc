@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using website_mvc.Dto;
 using website_mvc.Services.Abstractions;
 
 namespace website_mvc.Controllers
@@ -32,9 +33,9 @@ namespace website_mvc.Controllers
             return View("EditBook", book);
         }
 
-        public async Task<IActionResult> Update(string id, string title, string author, string description)
+        public async Task<IActionResult> Update([FromBody] BookDto bookDto)
         {
-            await _bookService.Update(id, title, author, description);
+            await _bookService.Update(bookDto.Id, bookDto.Title, bookDto.Author, bookDto.Description);
             var books = await _bookService.GetAll();
             return View("../Home/Admin", books); 
         }
@@ -44,9 +45,9 @@ namespace website_mvc.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Create(string title, string author, string description)
+        public async Task<IActionResult> Create([FromBody] BookDto bookDto)
         {
-            await _bookService.Create(title, author, description);
+            await _bookService.Create(bookDto.Title, bookDto.Author, bookDto.Description);
             var books = await _bookService.GetAll();
             return View("../Home/Admin", books); 
         }
