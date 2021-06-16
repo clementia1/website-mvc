@@ -33,7 +33,6 @@ namespace website_mvc
                 })
                 .SetHandlerLifetime(TimeSpan.FromMinutes(5));
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.AddTransient<IBookService, BookService>();
             services.AddControllersWithViews();
         }
 

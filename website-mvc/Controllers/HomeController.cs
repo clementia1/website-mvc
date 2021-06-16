@@ -31,12 +31,6 @@ namespace website_mvc.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Admin()
-        {
-            var books = await _bookService.GetAll();
-            return View(books);
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
